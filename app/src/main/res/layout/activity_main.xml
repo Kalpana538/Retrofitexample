@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+   <TextView
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:text="covid 19 reports"
+       android:textSize="40sp"
+       android:gravity="center"
+       android:textColor="@color/colorPrimary"/>
+    <TextView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="date"
+    android:textSize="40sp"
+    android:gravity="center"
+        android:id="@+id/tv_date"
+    android:textColor="@color/colorAccent"/>
+    <TextView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="country"
+    android:textSize="40sp"
+    android:gravity="center"
+        android:id="@+id/tv_country"
+    android:textColor="@color/colorAccent"/>
+    <TextView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="activecases"
+    android:textSize="40sp"
+    android:gravity="center"
+        android:id="@+id/tv_activecases"
+    android:textColor="@color/colorAccent"/>
+    <TextView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="confirmedcases"
+        android:id="@+id/tv_confirmedcases"
+    android:textSize="40sp"
+    android:gravity="center"
+    android:textColor="@color/colorAccent"/>
+    <TextView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="deathcases"
+    android:textSize="40sp"
+    android:gravity="center"
+        android:id="@+id/tv_deathcases"
+    android:textColor="@color/colorAccent"/>
+    <TextView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="recoveredcases"
+    android:textSize="40sp"
+    android:gravity="center"
+        android:id="@+id/tv_recoveredcases"
+    android:textColor="@color/colorAccent"/>
+
+
+
+
+
+
+</LinearLayout>
