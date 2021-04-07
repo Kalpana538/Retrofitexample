@@ -1,6 +1,8 @@
 package com.example.retrofitexample;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -18,6 +20,7 @@ import org.json.JSONObject;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.logging.SimpleFormatter;
 
 import retrofit2.Call;
@@ -25,8 +28,10 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
-    TextView date, country, activecases, recoveredcases, deathcases, cofirmedcases;
+    TextView date;
     ProgressDialog dailog;
+    RecyclerView rv;
+    RecyclerDateAdapter dateAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,26 +41,43 @@ public class MainActivity extends AppCompatActivity {
         dailog.setTitle("Data Fetching..");
         dailog.setMessage("please wait....");
         dailog.show();
-        date = findViewById(R.id.tv_date);
-        country = findViewById(R.id.tv_country);
+        rv=findViewById(R.id.rec);
+        /*country = findViewById(R.id.tv_country);
         activecases = findViewById(R.id.tv_activecases);
+        date = findViewById(R.id.tv_date);
         cofirmedcases = findViewById(R.id.tv_confirmedcases);
         deathcases = findViewById(R.id.tv_deathcases);
-        recoveredcases = findViewById(R.id.tv_recoveredcases);
+        recoveredcases = findViewById(R.id.tv_recoveredcases);*/
         ConnectivityManager cm = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
         //assert cm != null;
         NetworkInfo networkInfo = cm.getActiveNetworkInfo();
         if (networkInfo == null) {
-            AlertDialog.Builder builder=new AlertDialog.Builder(this);
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setTitle("Alert..!");
             builder.setMessage("please check your internet connection");
             builder.setIcon(R.drawable.ic_warning_black_24dp);
             Toast.makeText(this, "no internet", Toast.LENGTH_SHORT).show();
         } else {
+            dailog.show();
             Toast.makeText(this, "welcome", Toast.LENGTH_SHORT).show();
 
             EndpointInterface ei = RetrofitInstance.getRetrofit().create(EndpointInterface.class);
-            Call<String> c = ei.getData();
+            Call<List<Repo>> c=ei.getData();
+                    c.enqueue(new Callback<List<Repo>>() {
+                        @Override
+                        public void onResponse(Call<List<Repo>> call, Response<List<Repo>> response) {
+                       dailog.dismiss();
+                       dateAdapter=new RecyclerDateAdapter(getApplicationContext(),response.body());
+                       rv.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+                       rv.setAdapter(dateAdapter);
+                        }
+
+                        @Override
+                        public void onFailure(Call<List<Repo>> call, Throwable t) {
+
+                        }
+                    });
+           /*Call<String> c = ei.getData();
             c.enqueue(new Callback<String>() {
                 @Override
                 public void onResponse(Call<String> call, Response<String> response) {
@@ -106,6 +128,7 @@ public class MainActivity extends AppCompatActivity {
 
                 }
             });
+        }*/
         }
     }
 }
